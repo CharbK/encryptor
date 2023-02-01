@@ -1,13 +1,22 @@
-'''
-Code by Charbel Kassab 2023
-This is just a tiny project I made during dead time.
-It can encrypt and decrypt messages with a key.
-Note: The bigger the key, the more secure the encryption.
-'''
-
 import random
+import pyperclip
 
-ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456790.,!?;:-\'"()  '
+ALPHABET = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890.,!?;:-\'"()/-_=+  '
+
+class bcolors:
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+    BLACK = '\033[30m'
+    RED = '\033[31m'
+    GREEN = '\033[32m'
+    YELLOW = '\033[33m'
+    BLUE = '\033[34m'
+    MAGENTA = '\033[35m'
+    CYAN = '\033[36m'
+    WHITE = '\033[37m'
 
 def encrypt(string, key=0):
     result = 0
@@ -17,6 +26,7 @@ def encrypt(string, key=0):
         # print(temp)
         result += temp
 
+    pyperclip.copy(str(result + key))
     return str(result + key)
 
 def decrypt(string, key=0):
@@ -27,6 +37,7 @@ def decrypt(string, key=0):
         res += ALPHABET[(num % len(ALPHABET)) - 1]
         num //= len(ALPHABET)
 
+    pyperclip.copy(res[::-1])
     return res[::-1]
 
 def test():
@@ -57,20 +68,6 @@ def find_accuracy():
 
     print(f"Accuracy: {(amount_correct/amount_done) * 100}%")
 
-class bcolors:
-    WARNING = '\033[93m'
-    FAIL = '\033[91m'
-    ENDC = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
-    BLACK = '\033[30m'
-    RED = '\033[31m'
-    GREEN = '\033[32m'
-    YELLOW = '\033[33m'
-    BLUE = '\033[34m'
-    MAGENTA = '\033[35m'
-    CYAN = '\033[36m'
-    WHITE = '\033[37m'
 
 def main():
 
